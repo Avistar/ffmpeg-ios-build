@@ -1,7 +1,7 @@
 #!/bin/sh
 
 PLATFORMBASE=$(xcode-select -print-path)"/Platforms"
-IOSSDKVERSION=5.0
+IOSSDKVERSION=5.1
 
 set -e
 
@@ -45,7 +45,7 @@ do
             IOSSDK=iPhoneOS${IOSSDKVERSION}
             ;;
         i386)
-            EXTRA_FLAGS="--enable-pic"
+            EXTRA_FLAGS="--enable-pic --disable-yasm"
             EXTRA_CFLAGS=""
             PLATFORM="${PLATFORMBASE}/iPhoneSimulator.platform"
             IOSSDK=iPhoneSimulator${IOSSDKVERSION}
@@ -63,13 +63,12 @@ do
     --cross-prefix="${PLATFORM}/Developer/usr/bin/" \
     --sysroot="${PLATFORM}/Developer/SDKs/${IOSSDK}.sdk" \
     --extra-ldflags=-L${PLATFORM}/Developer/SDKs/${IOSSDK}.sdk/usr/lib/system \
-    --disable-bzlib \
-    --disable-doc \
-    --disable-ffmpeg \
-    --disable-ffplay \
-    --disable-ffserver \
-    --disable-ffprobe \
-    --as="gas-preprocessor.pl ${PLATFORM}/Developer/usr/bin/as" \
+    --enable-static \
+    --disable-shared  \
+    --disable-asm --disable-yasm \
+    --disable-mmx --disable-mmx2 \
+    --disable-sse --disable-ssse3 \
+    --as="gas-preprocessor.pl ${PLATFORM}/Developer/usr/bin/arm-apple-darwin10-llvm-gcc-4.2" \
     --extra-ldflags="-arch $ARCH" \
     --extra-cflags="-arch $ARCH $EXTRA_CFLAGS" \
     --extra-cxxflags="-arch $ARCH" \
