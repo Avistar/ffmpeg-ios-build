@@ -1,14 +1,19 @@
 USAGE
 
-Run ./sync.sh, ./build.sh and ./combine.sh as appropriate. It is probably
-needed to change some variables in ./build.sh and maybe ./sync.sh.
+one you have a git clone of this project:
+- cd to the directory.
+- run `./sync.sh`
+- run `cd ffmpeg`
+- run `git checkout <desired tag>`
+- run `cd ..`
+- run `./build.sh`
+- When done, copy the contents of "dist-armv7/lib" to "<c3 project>/vendor/doubango/thirdparties/iphone/lib/armv7
+- copy the contents of "dist-i386/lib" to "<c3 project>/vendor/doubango/thirdparties/iphone/lib/i386
+- copy the contents of "dist-armv7/include" to "<c3 project>/vendor/doubango/thirdparties/iphone/include
+- Clean the c3 mobile project
+- Compile and fix any errors created by the new version.
 
-To find out which SDKs are supported run:
-xcodebuild -showsdks
-
-To switch which XCode Installation is used, run
-sudo xcode-select -switch $XCODEROOT
-
+Note: the contents of dist-armv7/include and dist-i386/include are always the same, thats why we only copy the one dir for that
 
 CREDITS
 
