@@ -65,9 +65,18 @@ do
     --extra-ldflags=-L${PLATFORM}/Developer/SDKs/${IOSSDK}.sdk/usr/lib/system \
     --enable-static \
     --disable-shared  \
-    --disable-asm --disable-yasm \
-    --disable-mmx --disable-mmx2 \
-    --disable-sse --disable-ssse3 \
+    --enable-memalign-hack --enable-runtime-cpudetect --enable-hardcoded-tables --enable-nonfree \
+    --disable-shared --enable-static \
+    --disable-network --disable-protocols --disable-pthreads \
+    --disable-devices --disable-filters --disable-bsfs --disable-muxers --disable-demuxers --disable-parsers \
+    --enable-hwaccel=h264_vaapi --enable-hwaccel=h264_dxva2 \
+    --disable-ffmpeg --disable-ffplay --disable-ffserver \
+    --disable-encoders --disable-decoders \
+    --disable-zlib \
+    --enable-gpl \
+    --disable-debug \
+    --enable-encoder=h263 --enable-encoder=h263p --enable-decoder=h263 \
+    --enable-encoder=mpeg4 --enable-decoder=mpeg4 \
     --as="gas-preprocessor.pl ${PLATFORM}/Developer/usr/bin/arm-apple-darwin10-llvm-gcc-4.2" \
     --extra-ldflags="-arch $ARCH" \
     --extra-cflags="-arch $ARCH $EXTRA_CFLAGS" \
